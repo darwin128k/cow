@@ -19,6 +19,11 @@ set(CGLM_STATIC ON CACHE BOOL "" FORCE)
 set(CGLM_SHARED OFF CACHE BOOL "" FORCE)
 add_subdirectory(lib/cglm EXCLUDE_FROM_ALL)
 
+set(LH_BUILD_SHARED OFF CACHE BOOL "" FORCE)
+set(LH_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set(LH_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+add_subdirectory(lib/lh EXCLUDE_FROM_ALL)
+
 add_executable(cow
     lib/glad/src/glad.c
     src/cow/main.c
@@ -31,7 +36,7 @@ add_executable(cow
     src/cow/driver/gl/settings.c
 )
 target_include_directories(cow PRIVATE include "${CMAKE_CURRENT_SOURCE_DIR}/lib/glad/include")
-target_link_libraries(cow PRIVATE glfw cglm)
+target_link_libraries(cow PRIVATE glfw cglm lh)
 
 if(WIN32)
   target_link_libraries(cow PRIVATE opengl32)
